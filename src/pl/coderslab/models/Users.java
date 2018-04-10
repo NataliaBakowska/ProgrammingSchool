@@ -8,14 +8,20 @@ import java.util.ArrayList;
 
 public class Users {
 
-	private int id;
-    private String username;
-    private String password;
-    private String email;
+	protected int id;
+	protected String username;
+	protected String password;
+	protected String email;
+	protected String user_group_id;
     
-    public Users(String username, String email, String password) {
+   
+		
+
+	public Users(String username, String email, String password, String user_group_id) {
 		this.username = username;
 		this.email = email;
+		this.user_group_id = user_group_id;
+		//setter zapisuje zaszyfrowane hasło
 		this.setPassword(password);
     	
     }
@@ -50,11 +56,18 @@ public class Users {
 		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 	
+	public String getUser_group_id() {
+			return user_group_id;
+	}
+
+	public void setUser_group_id(String user_group_id) {
+		this.user_group_id = user_group_id;
+	}
 
 
 	public void saveToDB(Connection conn) throws SQLException {
 		if (this.id == 0) {
-			String sql = "INSERT INTO Users(username, email, password) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO Users(username, email, password, user_group_id) VALUES (?, ?, ?,  ?)";
 			//jakie kolumny po zapisie nowego obiektu baza ma nam zwrócić - w tym przypadku interesuje nas id
 			String generatedColumns[] = { "ID" };
 			PreparedStatement preparedStatement;
@@ -62,22 +75,26 @@ public class Users {
 			preparedStatement.setString(1, this.username);
 			preparedStatement.setString(2, this.email);
 			preparedStatement.setString(3, this.password);
+			preparedStatement.setString(4, this.user_group_id);
 			preparedStatement.executeUpdate();
 			//tutaj jest wynik naszego zapytania - generated column
 			ResultSet rs = preparedStatement.getGeneratedKeys();
-			//jeśli nie istnieje to go zapisze??
+			//jeśli nie istnieje to go zapisze
+			//jeśli istnieje to zrobi update
 			if (rs.next()) {
 				this.id = rs.getInt(1);
-			}else {
-			    String sql2 = "UPDATE Users SET username=?, email=?, password=? where id = ?";
-			    PreparedStatement preparedStatement2;
-			    preparedStatement = conn.prepareStatement(sql);
-			    preparedStatement.setString(1, this.username);
-			    preparedStatement.setString(2, this.email);
-			    preparedStatement.setString(3, this.password);
-			    preparedStatement.setInt(4, this.id);
-			    preparedStatement.executeUpdate();
-			}	
+			}
+		}else {
+			  String sql2 = "UPDATE Users SET username=?, email=?, password=?, user_group_id=? where id = ?";
+			  PreparedStatement preparedStatement2;
+			  preparedStatement2 = conn.prepareStatement(sql2);
+			  preparedStatement2.setString(1, this.username);
+			  preparedStatement2.setString(2, this.email);
+			  preparedStatement2.setString(3, this.password);
+			  preparedStatement2.setInt(5, this.id);
+			  preparedStatement2.setString(4, this.user_group_id);
+			  preparedStatement2.executeUpdate();
+			
 		}
 	}
 		
@@ -95,6 +112,7 @@ public class Users {
 			loadedUser.username = resultSet.getString("username");
 			loadedUser.password = resultSet.getString("password");
 			loadedUser.email = resultSet.getString("email");
+			loadedUser.user_group_id = resultSet.getString("user_group_id");
 			return loadedUser;}
 		return null;
 	}
@@ -110,6 +128,7 @@ public class Users {
 	        loadedUser.username = resultSet.getString("username");
 	        loadedUser.password = resultSet.getString("password");
 	        loadedUser.email = resultSet.getString("email");
+	        loadedUser.user_group_id = resultSet.getString("user_group_id");
 	        users.add(loadedUser);}
 	    Users[] uArray = new Users[users.size()]; uArray = users.toArray(uArray);
 	    return uArray;}

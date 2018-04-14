@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class Exercise {
 
-	private int id;
-	private String title;
-	private String description;
+	public int id;
+	public String title;
+	public String description;
 	
 	public Exercise() {}
 	
@@ -114,6 +114,9 @@ public class Exercise {
 	        preparedStatement.executeUpdate();
 	        this.id=0;
 	    }
+	}
+
+	public void setId(int id) {
 	}
 
 

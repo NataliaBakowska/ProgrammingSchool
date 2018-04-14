@@ -27,8 +27,8 @@ public class User_group {
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public int getId() {
+		return id;
 	}
 
 

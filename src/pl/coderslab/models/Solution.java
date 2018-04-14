@@ -1,53 +1,50 @@
 package pl.coderslab.models;
 
-import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 
 public class Solution {
 
 	private int id;
-	private SimpleDateFormat created;
-	private SimpleDateFormat updated;
+	private Timestamp created;
+	private Timestamp updated;
 	private String description;
 	private int exercise_id;
 	private int users_id;
-	private SimpleDateFormat updatedByDate;
 	
 	public Solution() {}
 	
-	public Solution(SimpleDateFormat created,SimpleDateFormat updated, String description, int exercise_id, int users_id ) {
-		this.created = created;
-		this.updated = updated;
+	public Solution(String created,String updated, String description, int exercise_id, int users_id ) {
+		
+		Timestamp myDate = Timestamp.valueOf(created);
+    	this.created = myDate;
+    	
+    	Timestamp myDate2 = Timestamp.valueOf(updated);
+		this.updated = myDate2;
 		this.description = description;
 		this.exercise_id = exercise_id;
 		this.users_id = users_id;
 	}
 
-	public SimpleDateFormat getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
-	public void setCreated(SimpleDateFormat created) {
+	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
 
-	public SimpleDateFormat getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(SimpleDateFormat updated) {
+	public void setUpdated(Timestamp updated) {
 		this.updated = updated;
 	}
 
@@ -86,8 +83,8 @@ public class Solution {
 			String generatedColumns[] = { "ID" };
 			PreparedStatement preparedStatement;
 			preparedStatement = conn.prepareStatement(sql, generatedColumns);
-			preparedStatement.setBlob(1, (Blob) this.created);
-			preparedStatement.setBlob(2, (Blob) this.updated);
+			preparedStatement.setTimestamp(1, this.created);
+			preparedStatement.setTimestamp(2, this.updated);
 			preparedStatement.setString(3, this.description);
 			preparedStatement.setInt(4, this.exercise_id);
 			preparedStatement.setInt(5, this.users_id);
@@ -103,8 +100,8 @@ public class Solution {
 			  String sql2 = "UPDATE Users SET created=?, updated=?, description=?, exercise_id=? users_id = ?";
 			  PreparedStatement preparedStatement2;
 			  preparedStatement2 = conn.prepareStatement(sql2);
-			  preparedStatement2.setBlob(1, (Blob) this.created);
-			  preparedStatement2.setBlob(2, (Blob) this.updated);
+			  preparedStatement2.setTimestamp(1, this.created);
+			  preparedStatement2.setTimestamp(2, this.updated);
 			  preparedStatement2.setString(3, this.description);
 			  preparedStatement2.setInt(5, this.exercise_id);
 			  preparedStatement2.setInt(4, this.users_id);
@@ -124,8 +121,8 @@ public class Solution {
 			//pobieramy wartości z resultseta i przypisujemy do stworzonego przed chwilą użytkownika
 			Solution loadedSolution = new Solution();
 			loadedSolution.id = resultSet.getInt("id");
-			loadedSolution.created = (SimpleDateFormat) resultSet.getBlob("created");
-			loadedSolution.updated = (SimpleDateFormat) resultSet.getBlob("updated");
+			loadedSolution.created = resultSet.getTimestamp("created");
+			loadedSolution.updated = resultSet.getTimestamp("updated");
 			loadedSolution.description = resultSet.getString("description");
 			loadedSolution.exercise_id = resultSet.getInt("exercise_id");
 			loadedSolution.users_id = resultSet.getInt("users_id");
@@ -143,8 +140,8 @@ public class Solution {
 	    while (resultSet.next()) {
 	    	Solution loadedSolution = new Solution();
 	    	loadedSolution.id = resultSet.getInt("id");
-	    	loadedSolution.created = (SimpleDateFormat) resultSet.getBlob("created");
-	    	loadedSolution.updated = (SimpleDateFormat) resultSet.getBlob("updated");
+	    	loadedSolution.created = resultSet.getTimestamp("created");
+	    	loadedSolution.updated = resultSet.getTimestamp("updated");
 	    	loadedSolution.description = resultSet.getString("description");
 	    	loadedSolution.exercise_id = resultSet.getInt("exercise_id");
 	    	loadedSolution.users_id = resultSet.getInt("users_id");
@@ -175,8 +172,8 @@ public class Solution {
 		while (resultSet.next()) {
 			Solution loadedSolution = new Solution();
 			loadedSolution.id = resultSet.getInt("id");
-	    	loadedSolution.created = (SimpleDateFormat) resultSet.getBlob("created");
-	    	loadedSolution.updated = (SimpleDateFormat) resultSet.getBlob("updated");
+	    	loadedSolution.created = resultSet.getTimestamp("created");
+	    	loadedSolution.updated = resultSet.getTimestamp("updated");
 	    	loadedSolution.description = resultSet.getString("description");
 	    	loadedSolution.exercise_id = resultSet.getInt("exercise_id");
 	    	loadedSolution.users_id = resultSet.getInt("users_id");
@@ -197,32 +194,14 @@ public class Solution {
 		while (resultSet.next()) {
 			Solution loadedSolution = new Solution();
 			loadedSolution.id = resultSet.getInt("id");
-	    	loadedSolution.created = (SimpleDateFormat) resultSet.getBlob("created");
-	    	loadedSolution.updated = (SimpleDateFormat) resultSet.getBlob("updated");
+	    	loadedSolution.created = resultSet.getTimestamp("created");
+	    	loadedSolution.updated = resultSet.getTimestamp("updated");
 	    	loadedSolution.description = resultSet.getString("description");
 	    	loadedSolution.exercise_id = resultSet.getInt("exercise_id");
-	    	loadedSolution.users_id = resultSet.getInt("users_id");
-	    	
-	    	String myDateString = resultSet.getString("updated");
-	    	SimpleDateFormat myDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	    	try {
-				Date date = (Date) myDate.parse(myDateString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	loadedSolution.updatedByDate = myDate;
-	    	
+	    	loadedSolution.users_id = resultSet.getInt("users_id");    	
 	    	exerciseSolutions.add(loadedSolution);
 	    }
-		//Collections.sort(exerciseSolutions, new Comparator<Solution>() {
-	       // @Override
-	        //public int compare(Solution solution1, Solution solution2)
-	        //{
-
-	            //return  ((Comparable<String>) solution1.updated).compareTo(solution2.updated);
-	        //}
-	    //});
+		
 		Solution[] esArray = new Solution[exerciseSolutions.size()]; 
 		esArray = exerciseSolutions.toArray(esArray);
 		return esArray;

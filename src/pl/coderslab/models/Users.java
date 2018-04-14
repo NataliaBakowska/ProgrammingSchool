@@ -12,12 +12,12 @@ public class Users {
 	protected String username;
 	protected String password;
 	protected String email;
-	protected String user_group_id;
+	protected int user_group_id;
     
    
 		
 
-	public Users(String username, String email, String password, String user_group_id) {
+	public Users(String username, String email, String password, int user_group_id) {
 		this.username = username;
 		this.email = email;
 		this.user_group_id = user_group_id;
@@ -56,18 +56,18 @@ public class Users {
 		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 	
-	public String getUser_group_id() {
+	public int getUser_group_id() {
 			return user_group_id;
 	}
 
-	public void setUser_group_id(String user_group_id) {
+	public void setUser_group_id(int user_group_id) {
 		this.user_group_id = user_group_id;
 	}
 
 
 	public void saveToDB(Connection conn) throws SQLException {
 		if (this.id == 0) {
-			String sql = "INSERT INTO Users(username, email, password, user_group_id) VALUES (?, ?, ?,  ?)";
+			String sql = "INSERT INTO Users(username, email, password, user_group_id) VALUES (?, ?, ?, ?)";
 			//jakie kolumny po zapisie nowego obiektu baza ma nam zwrócić - w tym przypadku interesuje nas id
 			String generatedColumns[] = { "ID" };
 			PreparedStatement preparedStatement;
@@ -75,7 +75,7 @@ public class Users {
 			preparedStatement.setString(1, this.username);
 			preparedStatement.setString(2, this.email);
 			preparedStatement.setString(3, this.password);
-			preparedStatement.setString(4, this.user_group_id);
+			preparedStatement.setInt(4, this.user_group_id);
 			preparedStatement.executeUpdate();
 			//tutaj jest wynik naszego zapytania - generated column
 			ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -92,7 +92,7 @@ public class Users {
 			  preparedStatement2.setString(2, this.email);
 			  preparedStatement2.setString(3, this.password);
 			  preparedStatement2.setInt(5, this.id);
-			  preparedStatement2.setString(4, this.user_group_id);
+			  preparedStatement2.setInt(4, this.user_group_id);
 			  preparedStatement2.executeUpdate();
 			
 		}
@@ -112,7 +112,7 @@ public class Users {
 			loadedUser.username = resultSet.getString("username");
 			loadedUser.password = resultSet.getString("password");
 			loadedUser.email = resultSet.getString("email");
-			loadedUser.user_group_id = resultSet.getString("user_group_id");
+			loadedUser.user_group_id = resultSet.getInt("user_group_id");
 			return loadedUser;}
 		return null;
 	}
@@ -128,7 +128,7 @@ public class Users {
 	        loadedUser.username = resultSet.getString("username");
 	        loadedUser.password = resultSet.getString("password");
 	        loadedUser.email = resultSet.getString("email");
-	        loadedUser.user_group_id = resultSet.getString("user_group_id");
+	        loadedUser.user_group_id = resultSet.getInt("user_group_id");
 	        users.add(loadedUser);}
 	    Users[] uArray = new Users[users.size()]; uArray = users.toArray(uArray);
 	    return uArray;}
@@ -144,5 +144,25 @@ public class Users {
 	    }
 	}
 
-
+	Users[] loadAllByGroupId(Connection conn) throws SQLException {
+		ArrayList<Users> allUsers = new ArrayList<Users>();
+		String sql = "SELECT * FROM Users where user_group_id = ?";
+		PreparedStatement preparedStatement;
+		preparedStatement = conn.prepareStatement(sql);
+		preparedStatement.setInt(1, this.getUser_group_id());
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			Users loadedUser = new Users();
+			loadedUser.id = resultSet.getInt("id");
+			loadedUser.username = resultSet.getString("username");
+			loadedUser.password = resultSet.getString("password");
+			loadedUser.email = resultSet.getString("email");
+	    	loadedUser.user_group_id = resultSet.getInt("user_group_id");   	
+	    	allUsers.add(loadedUser);
+		}
+		Users[] ugArray = new Users[allUsers.size()]; 
+		ugArray = allUsers.toArray(ugArray);
+		return ugArray;
+	}
+	
 }

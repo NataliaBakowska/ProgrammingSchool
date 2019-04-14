@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.nbakowska;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,18 +9,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
-import pl.coderslab.models.Exercise;
-import pl.coderslab.models.Solution;
-import pl.coderslab.models.User_group;
+import pl.nbakowska.model.Exercise;
+import pl.nbakowska.model.Solution;
 
 public class Main2 {
 
 	public static void main(String[] args) {
 		while(true) {
 			try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workshop2_ex?useSSL=false",
-	                "root", "coderslab")) {
+	                "root", "nbakowska")) {
 				Scanner scan = new Scanner(System.in);
 				System.out.println("Podaj swoje id: ");
 				int myId = scan.nextInt();

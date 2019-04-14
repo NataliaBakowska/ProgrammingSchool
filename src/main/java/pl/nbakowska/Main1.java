@@ -1,14 +1,14 @@
-package pl.coderslab;
+package pl.nbakowska;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.util.Scanner;
 
-import pl.coderslab.models.Exercise;
-import pl.coderslab.models.Solution;
-import pl.coderslab.models.User_group;
-import pl.coderslab.models.Users;
+import pl.nbakowska.model.Exercise;
+import pl.nbakowska.model.Solution;
+import pl.nbakowska.model.UserGroup;
+import pl.nbakowska.model.User;
 
 public class Main1 {
 
@@ -24,9 +24,9 @@ public class Main1 {
 	private static void usersManagement(Scanner scan) {
 		while(true) {
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workshop2_ex?useSSL=false",
-                "root", "coderslab")) {
+                "root", "nbakowska")) {
 			
-			Users[] myUsers = Users.loadAllUsers(conn);
+			User[] myUsers = User.loadAllUsers(conn);
 			for (int i =0; i<myUsers.length; i++) {
 				System.out.println("Id: " + myUsers[i].getId() +
 						" Username: " + myUsers[i].getUsername() + 
@@ -39,7 +39,7 @@ public class Main1 {
 			String password= "";
 			int user_group_id = 0;
 			//włożyć w pętlę while
-			System.out.println("Select option: " + "\n" + "add/edit/delete/quit");
+			System.out.println("Select option: " + "\n" + "add/edit/deleteSolution/quit");
 			
 			
 			String myChoice = scan.nextLine();
@@ -49,10 +49,10 @@ public class Main1 {
 				email = myData[1];
 				password = myData[2];
 				user_group_id = Integer.parseInt(myData[3]);
-				Users user1 = new Users(username, email, password, user_group_id);
+				User user1 = new User(username, email, password, user_group_id);
 				user1.saveToDB(conn);
 			} else if (myChoice.equalsIgnoreCase("edit")){
-				Users myUser = Users.loadUserById(conn, findItem(scan));
+				User myUser = User.loadUserById(conn, findItem(scan));
 				String[] myData = insertUserData(scan);
 				myUser.setUsername(myData[0]);
 				myUser.setEmail(myData[1]);
@@ -60,8 +60,8 @@ public class Main1 {
 				myUser.setUser_group_id(Integer.parseInt(myData[3]));
 				myUser.saveToDB(conn);
 				
-			} else if (myChoice.equalsIgnoreCase("delete")){
-				Users myUser = Users.loadUserById(conn, findItem(scan));
+			} else if (myChoice.equalsIgnoreCase("deleteSolution")){
+				User myUser = User.loadUserById(conn, findItem(scan));
 				myUser.delete(conn);
 				
 			} else if (myChoice.equalsIgnoreCase("quit")){
@@ -82,7 +82,7 @@ public class Main1 {
 	private static void exerciseManagement(Scanner scan) {
 		while(true) {
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workshop2_ex?useSSL=false",
-                "root", "coderslab")) {
+                "root", "nbakowska")) {
 			
 			Exercise[] myExercises = Exercise.loadAllExercises(conn);
 			for (int i =0; i<myExercises.length; i++) {
@@ -96,7 +96,7 @@ public class Main1 {
 			String description = "";
 		
 			
-			System.out.println("Select option: " + "\n" + "add/edit/delete/quit");
+			System.out.println("Select option: " + "\n" + "add/edit/deleteSolution/quit");
 			
 		
 			String myChoice = scan.nextLine();
@@ -114,7 +114,7 @@ public class Main1 {
 				myExercise.setTitle(myData[0]);
 				myExercise.setDescription(myData[1]);				
 				myExercise.saveToDB(conn);
-			} else if (myChoice.equalsIgnoreCase("delete")){
+			} else if (myChoice.equalsIgnoreCase("deleteSolution")){
 				Exercise myExercise = Exercise.loadExerciseById(conn, findItem(scan));
 				myExercise.delete(conn);
 				
@@ -135,9 +135,9 @@ public class Main1 {
 	private static void groupManagement(Scanner scan) {
 		while(true) {
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workshop2_ex?useSSL=false",
-                "root", "coderslab")) {
+                "root", "nbakowska")) {
 			
-			User_group[] myGroup = User_group.loadAllGroups(conn);
+			UserGroup[] myGroup = UserGroup.loadAllGroups(conn);
 			for (int i =0; i<myGroup.length; i++) {
 				System.out.println("Id: " + myGroup[i].getId() +
 						" Name: " + myGroup[i].getName());
@@ -145,7 +145,7 @@ public class Main1 {
 			}
 			
 			String name = "";
-			System.out.println("Select option: " + "\n" + "add/edit/delete/quit");
+			System.out.println("Select option: " + "\n" + "add/edit/deleteSolution/quit");
 			
 	
 			String myChoice = scan.nextLine();
@@ -153,14 +153,14 @@ public class Main1 {
 				String[] myData = insertGroupData(scan);
 				name = myData[0];
 				
-				User_group group1 = new User_group(name);
+				UserGroup group1 = new UserGroup(name);
 				group1.saveToDB(conn);
 			} else if (myChoice.equalsIgnoreCase("edit")){
-				User_group myGroup2 = User_group.loadGroupById(conn, findItem(scan));
+				UserGroup myGroup2 = UserGroup.loadGroupById(conn, findItem(scan));
 				String[] myData = insertGroupData(scan);
 				myGroup2.setName(myData[0]);
-			} else if (myChoice.equalsIgnoreCase("delete")){
-				User_group myGroup3 = User_group.loadGroupById(conn, findItem(scan));
+			} else if (myChoice.equalsIgnoreCase("deleteSolution")){
+				UserGroup myGroup3 = UserGroup.loadGroupById(conn, findItem(scan));
 				myGroup3.delete(conn);
 				
 			} else if (myChoice.equalsIgnoreCase("quit")){
@@ -180,7 +180,7 @@ public class Main1 {
 	private static void matchSolution(Scanner scan) {
 		while(true) {
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workshop2_ex?useSSL=false",
-                "root", "coderslab")) {
+                "root", "nbakowska")) {
 		
 			System.out.println("Select option: " + "\n" + "add/viev/quit");
 			
@@ -188,7 +188,7 @@ public class Main1 {
 		
 			if (myChoice.equalsIgnoreCase("add")) {
 				
-				Users[] myUsers = Users.loadAllUsers(conn);
+				User[] myUsers = User.loadAllUsers(conn);
 				for (int i =0; i<myUsers.length; i++) {
 					System.out.println("Id: " + myUsers[i].getId() +
 							" Username: " + myUsers[i].getUsername() + 
@@ -211,8 +211,8 @@ public class Main1 {
 				mySolution.setCreated(new Timestamp(System.currentTimeMillis()));
 				mySolution.setUpdated(null);
 				mySolution.setDescription(null);
-				mySolution.setExercise_id(idExercise);
-				mySolution.setUsers_id(idUser);
+				mySolution.setExerciseId(idExercise);
+				mySolution.setUserId(idUser);
 				mySolution.saveToDB(conn);
 			
 			} else if (myChoice.equalsIgnoreCase("viev")){
@@ -221,8 +221,8 @@ public class Main1 {
 				for (int i =0; i<mySolutions.length; i++) {
 					System.out.println("Id: " + mySolutions[i].getId() +
 							" Description: " + mySolutions[i].getDescription() + 
-							" User id: " + mySolutions[i].getUsers_id() +
-							" Exercise id: " + mySolutions[i].getExercise_id());
+							" User id: " + mySolutions[i].getUserId() +
+							" Exercise id: " + mySolutions[i].getExerciseId());
 				}
 			} else if (myChoice.equalsIgnoreCase("quit")){
 				System.out.println("The end");

@@ -1,7 +1,6 @@
 package pl.nbakowska.dao;
 
 import pl.nbakowska.db.DbUtil;
-import pl.nbakowska.model.User;
 import pl.nbakowska.model.UserGroup;
 
 import java.sql.Connection;

@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
             UserDao.saveOrUpdate(new User("name", "email", "password"));
         } catch (SQLException e) {
             e.printStackTrace();
-            out.print("zjebalo sieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            out.print("nie działa");
         } finally {
             out.print("Added user");
         }

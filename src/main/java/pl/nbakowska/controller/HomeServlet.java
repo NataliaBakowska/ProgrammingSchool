@@ -3,6 +3,9 @@ package pl.nbakowska.controller;
 import pl.nbakowska.dao.UserDao;
 import pl.nbakowska.model.User;
 
+import pl.nbakowska.dao.UserDao;
+import pl.nbakowska.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

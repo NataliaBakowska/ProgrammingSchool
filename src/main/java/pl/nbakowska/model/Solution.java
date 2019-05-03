@@ -13,13 +13,9 @@ public class Solution {
 
 	public Solution() {}
 
-	public Solution(String created,String updated, String description, int exercise_id, int users_id ) {
-
-		Timestamp myDate = Timestamp.valueOf(created);
-    	this.created = myDate;
-
-    	Timestamp myDate2 = Timestamp.valueOf(updated);
-		this.updated = myDate2;
+	public Solution(Timestamp created, Timestamp updated, String description, int exercise_id, int users_id ) {
+    	this.created = created;
+		this.updated = updated;
 		this.description = description;
 		this.exerciseId = exercise_id;
 		this.userId = users_id;

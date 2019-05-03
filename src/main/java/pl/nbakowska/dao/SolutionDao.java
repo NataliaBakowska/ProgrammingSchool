@@ -15,12 +15,12 @@ public class SolutionDao {
     public static void saveOrUpdate(Solution solution) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (solution.getId() == 0) {
-            String sql = "INSERT INTO Solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO solutions (created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             setSolutionData(solution, ps);
             ps.executeUpdate();
-        }else {
-            String sql = "UPDATE Users SET created=?, updated=?, description=?, exercise_id=? user_id = ? where id = ?";
+        } else {
+            String sql = "UPDATE solutions SET created=?, updated=?, description=?, exercise_id=? user_id = ? where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             setSolutionData(solution, ps);
             ps.setInt(6,solution.getId());
@@ -48,7 +48,7 @@ public class SolutionDao {
 
     static public List<Solution> loadAllSolutions() throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Solution";
+        String sql = "SELECT * FROM solutions";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         return mapAllSolutions(resultSet);
@@ -57,7 +57,7 @@ public class SolutionDao {
     public static void deleteSolution(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (id != 0) {
-            String sql = "DELETE FROM Solution WHERE id= ?";
+            String sql = "DELETE FROM solutions WHERE id= ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -66,7 +66,7 @@ public class SolutionDao {
 
     public static List<Solution> findAllByUserId(int userId) throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Solution where users_id = ?";
+        String sql = "SELECT * FROM solutions where users_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, userId);
         ResultSet resultSet = ps.executeQuery();
@@ -75,7 +75,7 @@ public class SolutionDao {
 
     public static List<Solution> findAllByExerciseId(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Solution where exercise_id = ?";
+        String sql = "SELECT * FROM solutions where exercise_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet resultSet = ps.executeQuery();

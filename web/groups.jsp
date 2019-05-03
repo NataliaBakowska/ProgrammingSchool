@@ -6,7 +6,7 @@
     <title>All groups</title>
 </head>
 <body>
-<p>Users:</p>
+<h1>Groups</h1>
 <table>
     <tr>
         <td>Id</td>

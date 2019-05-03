@@ -6,10 +6,10 @@
         <title>Add user</title>
     </head>
     <body>
-    <form method="post" action="/user/add">
-        <input type="text" name="username"/>
-        <input type="text" name="password"/>
-        <input type="text" name="email"/>
+    <form method="post" action="${pageContext.request.contextPath}/users/add">
+        Username: <input type="text" name="username"/>
+        Password: <input type="text" name="password"/>
+        Email: <input type="text" name="email"/>
         <input type="submit" value="Accept">
     </form>
     </body>

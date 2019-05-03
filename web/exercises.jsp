@@ -3,10 +3,10 @@
 
 <html>
 <head>
-    <title>All users</title>
+    <title>All exercises</title>
 </head>
 <body>
-<p>Users:</p>
+<h1>Exercises</h1>
 <table>
     <tr>
         <td>Id</td>

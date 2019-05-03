@@ -6,7 +6,7 @@
     <title>All solutions</title>
 </head>
 <body>
-<p>Users:</p>
+<h1>Solutions</h1>
 <table>
     <tr>
         <td>Exercise id</td>

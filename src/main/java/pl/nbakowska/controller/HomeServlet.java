@@ -19,10 +19,5 @@ public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
-        try {
-            UserDao.saveOrUpdate(new User("sdfs","sdfsdf","sfsfd"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -16,13 +16,13 @@ public class EcerciseDao {
         Connection connection = DbUtil.getConn();
 
         if (exercise.getId() == 0) {
-            String sql = "INSERT INTO Exercise(title, description) VALUES (?, ?)";
+            String sql = "INSERT INTO exercises (title, description) VALUES (?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, exercise.getTitle());
             ps.setString(2, exercise.getDescription());
             ps.executeUpdate();
         }else {
-            String sql = "UPDATE Exercise SET title=?, description=? where id = ?";
+            String sql = "UPDATE exercises SET title=?, description=? where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, exercise.getTitle());
             ps.setString(2, exercise.getDescription());
@@ -33,32 +33,32 @@ public class EcerciseDao {
 
     static public Exercise findExerciseById(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Exercise where id=?";
+        String sql = "SELECT * FROM exercises where id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet resultSet = ps.executeQuery();
-        return mapAllxercises(resultSet).get(0);
+        return mapAllExercises(resultSet).get(0);
     }
 
     static public List<Exercise> findAllExercises() throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Exercise";
+        String sql = "SELECT * FROM exercises";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
-        return mapAllxercises(resultSet);
+        return mapAllExercises(resultSet);
     }
 
     static public void deleteExerCiseById(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (id != 0) {
-            String sql = "DELETE FROM Exercise WHERE id= ?";
+            String sql = "DELETE FROM exercises WHERE id= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         }
     }
 
-    private static List<Exercise> mapAllxercises(ResultSet resultSet) throws SQLException {
+    private static List<Exercise> mapAllExercises(ResultSet resultSet) throws SQLException {
         List <Exercise> exercises = new ArrayList<>();
         while (resultSet.next()) {
             Exercise exercise = new Exercise();

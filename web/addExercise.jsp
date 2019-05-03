@@ -6,9 +6,9 @@
         <title>Add exercise</title>
     </head>
     <body>
-    <form method="post" action="/exercises/add">
-        <input type="text" name="title"/>
-        <input type="text" name="description"/>
+    <form method="post" action="${pageContext.request.contextPath}/exercises/add">
+        Name: <input type="text" name="title"/>
+        Description: <input type="text" name="description"/>
         <input type="submit" value="Accept">
     </form>
     </body>

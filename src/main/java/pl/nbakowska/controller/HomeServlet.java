@@ -1,7 +1,5 @@
 package pl.nbakowska.controller;
 
-import pl.nbakowska.dao.UserDao;
-import pl.nbakowska.model.User;
 
 import pl.nbakowska.dao.UserDao;
 import pl.nbakowska.model.User;
@@ -12,24 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+
 
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.print("Hello World");
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
         try {
-            UserDao.saveOrUpdate(new User("name", "email", "password"));
+            UserDao.saveOrUpdate(new User("sdfs","sdfsdf","sfsfd"));
         } catch (SQLException e) {
             e.printStackTrace();
-            out.print("nie działa");
-        } finally {
-            out.print("Added user");
         }
     }
 }

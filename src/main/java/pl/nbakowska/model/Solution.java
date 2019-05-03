@@ -10,14 +10,14 @@ public class Solution {
 	private String description;
 	private int exerciseId;
 	private int userId;
-	
+
 	public Solution() {}
-	
+
 	public Solution(String created,String updated, String description, int exercise_id, int users_id ) {
-		
+
 		Timestamp myDate = Timestamp.valueOf(created);
     	this.created = myDate;
-    	
+
     	Timestamp myDate2 = Timestamp.valueOf(updated);
 		this.updated = myDate2;
 		this.description = description;

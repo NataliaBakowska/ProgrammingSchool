@@ -12,7 +12,7 @@ import java.util.List;
 
 public class EcerciseDao {
 
-    public void saveExercise(Exercise exercise) throws SQLException {
+    public static void saveOrUpdate(Exercise exercise) throws SQLException {
         Connection connection = DbUtil.getConn();
 
         if (exercise.getId() == 0) {

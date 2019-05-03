@@ -52,7 +52,7 @@ public class UserDao {
         return mapAllUsers(resultSet);
     }
 
-    public void deleteUser(int id) throws SQLException {
+    public static void deleteUser(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
         String sql = "DELETE FROM Users WHERE id= ?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class UserDao {
             user.setUsername(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
-            user.setUserGroupId(resultSet.getInt("user_group_id"));
+            user.setUserGroupId(resultSet.getInt("user_group"));
             allUsers.add(user);
         }
         return allUsers;

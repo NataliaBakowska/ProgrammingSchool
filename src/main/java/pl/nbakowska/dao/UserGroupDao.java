@@ -44,7 +44,7 @@ public class UserGroupDao {
         return mapAllUserGroups(resultSet);
     }
 
-    public void deleteUserGroup(int id) throws SQLException {
+    public static void deleteUserGroup(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (id != 0) {
             String sql = "DELETE FROM User_group WHERE id= ?";

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SolutionDao {
 
-    public void saveSolution(Solution solution) throws SQLException {
+    public static void saveOrUpdate(Solution solution) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (solution.getId() == 0) {
             String sql = "INSERT INTO Solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
@@ -28,7 +28,7 @@ public class SolutionDao {
         }
     }
 
-    private void setSolutionData(Solution solution, PreparedStatement ps) throws SQLException {
+    private static void setSolutionData(Solution solution, PreparedStatement ps) throws SQLException {
         ps.setTimestamp(1, solution.getCreated());
         ps.setTimestamp(2, solution.getUpdated());
         ps.setString(3, solution.getDescription());
@@ -54,7 +54,7 @@ public class SolutionDao {
         return mapAllSolutions(resultSet);
     }
 
-    public void deleteSolution(int id) throws SQLException {
+    public static void deleteSolution(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (id != 0) {
             String sql = "DELETE FROM Solution WHERE id= ?";

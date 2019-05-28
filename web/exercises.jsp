@@ -4,6 +4,21 @@
 <html>
 <head>
     <title>All exercises</title>
+    <style>
+        body {
+            background-color: #71C5D0;
+            text-align: center;
+        }
+        tr,td,th {
+            border: white;
+            border-style: dotted;
+            border-width: 1px;
+        }
+        h1 {
+            text-decoration: underline;
+            color: #301849;
+        }
+    </style>
 </head>
 <body>
 <h1>Exercises</h1>
@@ -19,7 +34,6 @@
             <td>${exercise.title}</td>
             <td>${exercise.description}</td>
         </tr>
-        <br>
     </c:forEach>
 </table>
 </body>

@@ -4,11 +4,18 @@
 <html>
     <head>
         <title>Add solution</title>
+        <style>
+            body {
+                background-color: #71C5D0;
+            }
+        </style>
     </head>
     <body>
     <form method="post" action="${pageContext.request.contextPath}/solutions/add">
-        Name: <input type="text" name="name"/>
+        Description: <input type="text" name="description"/>
+        <br>
         Exercise id: <input type="text" name="exerciseId"/>
+        <br>
         User id: <input type="text" name="userId"/>
         <input type="submit" value="Accept">
     </form>

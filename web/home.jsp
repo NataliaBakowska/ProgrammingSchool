@@ -3,6 +3,16 @@
 <html>
 <head>
     <title>Title</title>
+    <style type="text/css">
+        body {
+            background-color: white;
+            text-align: center;
+        }
+        a{
+            color: #C1E3AB;
+            background-color: #301849;
+        }
+    </style>
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/users/all">All users</a>

@@ -36,5 +36,6 @@ public class NewSolutionServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        getServletContext().getRequestDispatcher("/home.jsp").forward(req,resp);
     }
 }

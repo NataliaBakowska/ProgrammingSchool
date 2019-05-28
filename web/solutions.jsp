@@ -4,6 +4,22 @@
 <html>
 <head>
     <title>All solutions</title>
+    <style>
+        body {
+            background-color: #71C5D0;
+            text-align: center;
+        }
+        td,tr,th {
+            border: white;
+            border-style: dotted;
+            border-width: 1px;
+        }
+        h1 {
+            text-decoration: underline;
+            color: #301849;
+
+        }
+    </style>
 </head>
 <body>
 <h1>Solutions</h1>
@@ -23,7 +39,6 @@
             <td>${solution.created}</td>
             <td>${solution.description}</td>
         </tr>
-        <br>
     </c:forEach>
 </table>
 </body>

@@ -21,7 +21,7 @@ public class NewUserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
@@ -31,5 +31,7 @@ public class NewUserServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        getServletContext().getRequestDispatcher("/home.jsp").forward(req,resp);
     }
 }

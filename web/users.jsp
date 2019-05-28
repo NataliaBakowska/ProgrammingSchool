@@ -3,6 +3,23 @@
        <html>
        <head>
            <title>All users</title>
+           <style>
+               body {
+                   background-color: #71C5D0;
+                   text-align: center;
+               }
+               td,tr,th {
+                   border: darkblue;
+                   border-style: dotted;
+                   border-width: 1px;
+                   color: #301849;
+               }
+               h1 {
+                   text-decoration: underline;
+                   color: #C1E3AB;
+
+               }
+           </style>
        </head>
        <body>
        <h1>Users</h1>
@@ -19,7 +36,6 @@
                    <td>${user.username}</td>
                    <td>${user.userGroupId}</td>
                    <td>${user.email}</td>
-                   <%--<td><a href="/groups/users/"?id=<%out.println(rs.getString("id"));%>>See all users</a></td>--%>
                </tr>
            </c:forEach>
        </table>

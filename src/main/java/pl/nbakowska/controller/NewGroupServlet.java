@@ -24,12 +24,13 @@ public class NewGroupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        String description = req.getParameter("descriptio");
+        String description = req.getParameter("description");
 
         try {
             UserGroupDao.saveOrUpdate(new UserGroup(name, description));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        getServletContext().getRequestDispatcher("/home.jsp").forward(req,resp);
     }
 }

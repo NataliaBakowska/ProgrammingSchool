@@ -90,8 +90,8 @@ public class SolutionDao {
             solution.setCreated(resultSet.getTimestamp("created"));
             solution.setUpdated(resultSet.getTimestamp("updated"));
             solution.setDescription(resultSet.getString("description"));
-            solution.setExerciseId(resultSet.getInt("exerciseId"));
-            solution.setUserId(resultSet.getInt("userId"));
+            solution.setExerciseId(resultSet.getInt("exercise_id"));
+            solution.setUserId(resultSet.getInt("user_id"));
             solutions.add(solution);
         }
         return solutions;

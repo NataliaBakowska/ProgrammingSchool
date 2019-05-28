@@ -4,10 +4,17 @@
 <html>
     <head>
         <title>Add exercise</title>
+        <style>
+            body {
+                background-color: #71C5D0;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
     <form method="post" action="${pageContext.request.contextPath}/exercises/add">
         Name: <input type="text" name="title"/>
+        <br>
         Description: <input type="text" name="description"/>
         <input type="submit" value="Accept">
     </form>

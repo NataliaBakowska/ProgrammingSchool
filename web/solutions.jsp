@@ -38,6 +38,7 @@
             <td>${solution.updated}</td>
             <td>${solution.created}</td>
             <td>${solution.description}</td>
+            <td><a href="${pageContext.request.contextPath}/solutions/edit?id=${solution.id}">Edytuj</a></td>
         </tr>
     </c:forEach>
 </table>

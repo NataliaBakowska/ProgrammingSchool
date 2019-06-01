@@ -6,8 +6,9 @@
     <title>All groups</title>
     <style>
         body {
-            background-color: #71C5D0;
+            background-color: #301849;
             text-align: center;
+            color : white;
         }
         tr,td,th {
             border: white;
@@ -15,9 +16,12 @@
             border-width: 1px;
         }
         h1 {
-            text-decoration: underline;
-            color: #301849;
-
+            text-decoration: none;
+            color: white;
+        }
+        a {
+            text-decoration: white;
+            color: white;
         }
     </style>
 </head>
@@ -32,7 +36,8 @@
         <tr>
             <td>${group.id}</td>
             <td>${group.name}</td>
-            <%--see users in group--%>
+            <td></td>
+            <td><a href="${pageContext.request.contextPath}/users/all/group?id=${group.id}">See users in group</a></td>
         </tr>
 
     </c:forEach>

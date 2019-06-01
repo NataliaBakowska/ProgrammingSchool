@@ -5,19 +5,24 @@
            <title>All users</title>
            <style>
                body {
-                   background-color: #71C5D0;
+                   background-color: #301849;
                    text-align: center;
+                   color : white;
                }
                td,tr,th {
-                   border: darkblue;
+                   border: white;
                    border-style: dotted;
                    border-width: 1px;
-                   color: #301849;
+                   text-decoration: white;
                }
                h1 {
-                   text-decoration: underline;
-                   color: #C1E3AB;
+                   text-decoration: none;
+                   color: white;
 
+               }
+               a {
+                   text-decoration: white;
+                   color: white;
                }
            </style>
        </head>
@@ -36,7 +41,7 @@
                    <td>${user.username}</td>
                    <td>${user.userGroupId}</td>
                    <td>${user.email}</td>
-                   <td><a href="${pageContext.request.contextPath}/users/edit?id=${user.id}" >Add to group</a></td>
+                   <td style="border: none"><a href="${pageContext.request.contextPath}/users/edit?id=${user.id}" >Add to group</a></td>
                </tr>
            </c:forEach>
        </table>

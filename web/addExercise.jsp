@@ -6,8 +6,9 @@
         <title>Add exercise</title>
         <style>
             body {
-                background-color: #71C5D0;
+                background-color: #301849;
                 text-align: center;
+                color : white;
             }
         </style>
     </head>

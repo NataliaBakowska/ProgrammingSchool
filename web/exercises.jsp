@@ -6,8 +6,9 @@
     <title>All exercises</title>
     <style>
         body {
-            background-color: #71C5D0;
+            background-color: #301849;
             text-align: center;
+            color : white;
         }
         tr,td,th {
             border: white;
@@ -15,8 +16,9 @@
             border-width: 1px;
         }
         h1 {
-            text-decoration: underline;
-            color: #301849;
+            text-decoration: none;
+            color: white;
+
         }
     </style>
 </head>

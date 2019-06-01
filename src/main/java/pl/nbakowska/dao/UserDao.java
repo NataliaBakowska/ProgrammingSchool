@@ -63,7 +63,7 @@ public class UserDao {
 
     public static List<User> loadAllByGroupId(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Users where user_group_id = ?";
+        String sql = "SELECT * FROM users where user_group = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet resultSet = ps.executeQuery();

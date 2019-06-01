@@ -17,6 +17,8 @@
         Password: <input type="text" name="password"/>
         <br>
         Email: <input type="text" name="email"/>
+        <br>
+        UserGroupId: <input type="text" name="userGroupId">
         <input type="submit" value="Accept">
     </form>
     </body>

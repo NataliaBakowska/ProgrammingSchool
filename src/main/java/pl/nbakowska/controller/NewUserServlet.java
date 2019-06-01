@@ -25,9 +25,10 @@ public class NewUserServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        int userGroupId = Integer.parseInt(req.getParameter("userGroupId"));
 
         try {
-            UserDao.saveOrUpdate(new User(username, email, password));
+            UserDao.saveOrUpdate(new User(username, email, password, userGroupId));
         } catch (SQLException e) {
             e.printStackTrace();
         }

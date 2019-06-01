@@ -36,6 +36,7 @@
                    <td>${user.username}</td>
                    <td>${user.userGroupId}</td>
                    <td>${user.email}</td>
+                   <td><a href="${pageContext.request.contextPath}/users/edit?id=${user.id}" >Add to group</a></td>
                </tr>
            </c:forEach>
        </table>

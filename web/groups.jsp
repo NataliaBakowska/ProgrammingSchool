@@ -32,6 +32,7 @@
         <tr>
             <td>${group.id}</td>
             <td>${group.name}</td>
+            <%--see users in group--%>
         </tr>
 
     </c:forEach>

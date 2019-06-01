@@ -15,12 +15,12 @@ public class UserDao {
     public static void saveOrUpdate(User user) throws SQLException {
         Connection connection = DbUtil.getConn();
         if (user.getId() == 0) {
-            String sql = "INSERT INTO Users(username, email, password, user_group) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO users(username, email, password, user_group) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             setUserData(user, ps);
             ps.executeUpdate();
         } else {
-            String sql = "UPDATE Users SET username=?, email=?, password=?, user_group=? where id = ?";
+            String sql = "UPDATE users SET username=?, email=?, password=?, user_group=? where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             setUserData(user, ps);
             ps.setInt(5, user.getId());

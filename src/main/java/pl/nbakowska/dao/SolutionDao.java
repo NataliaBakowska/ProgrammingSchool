@@ -20,7 +20,7 @@ public class SolutionDao {
             setSolutionData(solution, ps);
             ps.executeUpdate();
         } else {
-            String sql = "UPDATE solutions SET created=?, updated=?, description=?, exercise_id=? user_id = ? where id = ?";
+            String sql = "UPDATE solutions SET created=?, updated=?, description=?, exercise_id=?, user_id = ? where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             setSolutionData(solution, ps);
             ps.setInt(6,solution.getId());
@@ -32,13 +32,13 @@ public class SolutionDao {
         ps.setTimestamp(1, solution.getCreated());
         ps.setTimestamp(2, solution.getUpdated());
         ps.setString(3, solution.getDescription());
-        ps.setInt(4, solution.getUserId());
-        ps.setInt(5, solution.getExerciseId());
+        ps.setInt(4, solution.getExerciseId());
+        ps.setInt(5, solution.getUserId());
     }
 
     static public Solution findSolutionById(int id) throws SQLException {
         Connection connection = DbUtil.getConn();
-        String sql = "SELECT * FROM Solution where id=?";
+        String sql = "SELECT * FROM solutions where id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();

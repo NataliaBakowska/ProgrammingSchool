@@ -39,6 +39,7 @@
             <td>${solution.created}</td>
             <td>${solution.description}</td>
             <td><a href="${pageContext.request.contextPath}/solutions/edit?id=${solution.id}">Edytuj</a></td>
+            <td><a href="${pageContext.request.contextPath}/solutions/delete?id=${solution.id}">Usuń</a></td>
         </tr>
     </c:forEach>
 </table>
